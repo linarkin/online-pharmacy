@@ -1,46 +1,101 @@
-# Getting Started with Create React App
+# Online Pharmacy Application
+
+A web application that displays a list of medications with features for filtering, sorting, and pagination.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## Frontend
 
-In the project directory, you can run:
+### Features
 
-### `yarn start`
+- **Medication List**: Displays a comprehensive list of medications.
+- **Filtering**: Filter medications by `name`, `description`, or `manufacturer`.
+- **Sorting**: Sort medications by price (low to high, high to low).
+- **Pagination**: Navigate between multiple pages of medication listings.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Styling
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+The application uses the MUI (Material-UI) component library for a responsive and modern UI.
+
+### Areas for Improvement
+
+Due to time constraints, the following features were left out:
+
+- **State Management**: No centralized state management was implemented as the application is small.
+- **Persistent Filters**: Filter and sorting preferences are not saved in the URL and reset on page reload.
+- **Test Coverage**: Integration tests need more coverage to improve reliability.
+
+## Backend: Node.js Server
+
+A simple Express.js API that serves the medication data with filtering, sorting, and pagination.
+
+### API Endpoint
+
+#### `GET /api/medications`
+
+Fetches a paginated list of medications.
+
+- **Query Parameters**:
+
+  - `page`: The current page number (default: 1).
+  - `limit`: The number of items per page (default: 10).
+  - `name`, `description`, `manufacturer`: Filters to search by (case-insensitive).
+  - `sortByPrice`: Sort by price (`asc` or `desc`).
+
+- **Response**:
+  - `medications`: Medications for the current page.
+  - `currentPage`: The current page number.
+  - `totalPages`: Total number of pages.
+  - `totalItems`: Total number of medications available after filtering.
+
+#### Example:
+
+```bash
+GET /api/medications?page=1&name=aspirin&sortByPrice=asc
+```
+
+### Server
+
+The backend server runs on port 5000 or the port defined in the `PORT` environment variable.
+
+## Setup and Running the Application
+
+1. **Install dependencies**:
+
+   ```bash
+   yarn
+   ```
+
+2. **Start the application**:
+   ```bash
+   yarn start
+   ```
+   - Runs the React app at [http://localhost:3000](http://localhost:3000).
+   - The medications API is available at [http://localhost:5000/api/medications](http://localhost:5000/api/medications).
+
+The app will reload automatically if you make changes, and lint errors will appear in the console.
+
+## Additional Commands
 
 ### `yarn test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Launches the test runner in interactive watch mode.
+
+For more information, see the [official documentation on running tests](https://facebook.github.io/create-react-app/docs/running-tests).
 
 ### `yarn build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Builds the application for production and outputs the optimized bundle to the `build` folder.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- React is bundled in production mode.
+- The build is minified, and filenames include content hashes for optimal caching.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+For more details on deployment, see the [deployment guide](https://facebook.github.io/create-react-app/docs/deployment).
 
 ### `yarn eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+**Note**: This is a one-way operation and cannot be undone.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+The `eject` command copies all configuration files and dependencies (e.g., Webpack, Babel, ESLint) directly into your project, allowing full control over the setup. This is only recommended for advanced use cases, as most projects won’t require this level of customization.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+All other commands will still work after ejecting, but will now use the copied scripts.
